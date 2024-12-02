@@ -72,13 +72,10 @@ class Knight:
         oldPosition = self.position
         chboard = copy.deepcopy(chessboard)
         self.setPosition(newPosition)
+        valid = (newPossition in possibleMoves)
         
         chboard[oldPosition[1]][oldPosition[0]] = -1
         chboard[self.position[1]][self.position[0]] = int(self.color)
-        
-        valid = False
-        if newPosition in possibleMoves:
-            valid = True
         
         return tuple([chboard, oldPosition, valid])
     
