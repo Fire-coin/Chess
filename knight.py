@@ -76,6 +76,8 @@ class Knight:
         
         chboard[oldPosition[1]][oldPosition[0]] = -1
         chboard[self.position[1]][self.position[0]] = int(self.color)
+
+        self.setPosition(oldPosition) # Setting back old possition
         
         return tuple([chboard, oldPosition, valid])
     
