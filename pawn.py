@@ -82,13 +82,12 @@ class Pawn():
         oldPosition = self.position
         chboard = copy.deepcopy(chessboard)
         self.setPosition(newPosition)
+        valid = (newPosition in possibleMoves)
         
         chboard[oldPosition[1]][oldPosition[0]] = -1
         chboard[self.position[1]][self.position[0]] = int(self.color)
         
-        valid = False
-        if newPosition in possibleMoves:
-            valid = True
+        self.setPosition(oldPosition) # Setting back old position
         
         return tuple([chboard, oldPosition, valid])
 
