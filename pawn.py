@@ -2,7 +2,7 @@
 import copy
 # 0 is for white in matrix
 # 1 is for black in matrix
-# -1 is for free space in cell
+# 2 is for free space in cell
 
 
 class Pawn():
@@ -31,14 +31,14 @@ class Pawn():
                                             # checking for pawn movement
         try:
             # Checking if first move of 2 squares is possible
-            if self.firstMove and chessBoard[row + rMove * 2][column] == -1:
+            if self.firstMove and chessBoard[row + rMove * 2][column] == 2:
                 moves.append([column, row + rMove * 2])
         except IndexError:
             pass
         
         try:
             # Checking if pawn can move 1 square forward
-            if chessBoard[row + rMove][column] == -1:
+            if chessBoard[row + rMove][column] == 2:
                 moves.append([column, row + rMove])
         except IndexError:
             pass
@@ -83,7 +83,7 @@ class Pawn():
         self.setPosition(newPosition)
         valid = (newPosition in possibleMoves)
         
-        chboard[oldPosition[1]][oldPosition[0]] = -1
+        chboard[oldPosition[1]][oldPosition[0]] = 2
         chboard[self.position[1]][self.position[0]] = int(self.color)
         
         self.setPosition(oldPosition) # Setting back old position
@@ -97,7 +97,7 @@ class Pawn():
         oldColumn = self.position[0]
         oldRow = self.position[1]
         
-        chessboard[oldRow][oldColumn] = -1 # Removing color from square where pawn was
+        chessboard[oldRow][oldColumn] = 2 # Removing color from square where pawn was
         chessboard[row][column] = self.color # Setting square where pawn moved to its color
         
         self.setPosition(newPosition) # Setting new position of pawn
