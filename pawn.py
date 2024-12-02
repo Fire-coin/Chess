@@ -29,7 +29,6 @@ class Pawn():
         
         rMove = -1 if self.direction else 1 # Row move is used to increment / decrement row when 
                                             # checking for pawn movement
-        #TODO Add try ... except statements to catch errors
         try:
             # Checking if first move of 2 squares is possible
             if self.firstMove and chessBoard[row + rMove * 2][column] == -1:
