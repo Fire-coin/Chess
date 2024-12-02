@@ -95,7 +95,7 @@ class Bishop:
         self.setPosition(newPosition)
         valid = (newPosition in possibleMoves)
         
-        chboard[oldPosition[1]][oldPosition[0]] = -1
+        chboard[oldPosition[1]][oldPosition[0]] = 2
         chboard[self.position[1]][self.position[0]] = int(self.color)
         
         self.setPosition(oldPosition) # Setting back old possition
@@ -109,7 +109,7 @@ class Bishop:
         oldColumn = self.position[0]
         oldRow = self.position[1]
         
-        chessboard[oldRow][oldColumn] = -1
+        chessboard[oldRow][oldColumn] = 2
         chessboard[row][column] = self.color
         
         self.setPosition(newPosition)
