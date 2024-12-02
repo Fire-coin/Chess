@@ -26,7 +26,7 @@ class Knight:
             if dx == 0:
                 try:
                     # X to the right
-                    if chessboard[row + dy][column + 1] == -1 or chessboard[row + dy][column + 1] == (not self.color):
+                    if chessboard[row + dy][column + 1] == 2 or chessboard[row + dy][column + 1] == (not self.color):
                         moves.append([column + 1, row + dy])
                 except IndexError:
                     pass
@@ -34,14 +34,14 @@ class Knight:
                 if column != 0:
                     try:
                         # X to the left
-                        if chessboard[row + dy][column - 1] == -1 or chessboard[column + dy][column - 1] == (not self.color):
+                        if chessboard[row + dy][column - 1] == 2 or chessboard[column + dy][column - 1] == (not self.color):
                             moves.append([column - 1, row + dy])
                     except IndexError:
                         pass
             else: # Moves that are left and right
                 try:
                     # Y downwards
-                    if chessboard[row + 1][column + dx] == -1 or chessboard[row + 1][column + dx] == (not self.color):
+                    if chessboard[row + 1][column + dx] == 2 or chessboard[row + 1][column + dx] == (not self.color):
                         moves.append([column + dx, row + 1])
                 except IndexError:
                     pass
@@ -49,7 +49,7 @@ class Knight:
                 if row != 0:
                     try:
                         # Y upwards
-                        if chessboard[row - 1][column + dx] == -1 or chessboard[row - 1][column + dx] == (not self.color):
+                        if chessboard[row - 1][column + dx] == 2 or chessboard[row - 1][column + dx] == (not self.color):
                             moves.append([column + dx, row - 1])
                     except IndexError:
                         pass
@@ -74,7 +74,7 @@ class Knight:
         self.setPosition(newPosition)
         valid = (newPossition in possibleMoves)
         
-        chboard[oldPosition[1]][oldPosition[0]] = -1
+        chboard[oldPosition[1]][oldPosition[0]] = 2
         chboard[self.position[1]][self.position[0]] = int(self.color)
 
         self.setPosition(oldPosition) # Setting back old possition
@@ -89,7 +89,7 @@ class Knight:
         oldColumn = self.position[0]
         oldRow = self.position[1]
         
-        chessboard[oldRow][oldColumn] = -1 # Removing color from square where knight
+        chessboard[oldRow][oldColumn] = 2 # Removing color from square where knight
         chessboard[row][column] = self.color # Setting square where knight moved to its color
         
         self.setPosition(newPosition) # Setting new position of knight
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     k = Knight([6, 7], 1, 0)
     ch = []
     for i in range(8):
-        ch.append([-1] * 8)
+        ch.append([2] * 8)
     ch[7][6] = 1
     ch[6][4] = 0
     for i in ch:
