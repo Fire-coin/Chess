@@ -1,17 +1,9 @@
-# import tkinter as tk
-import copy
-# 0 is for white in matrix
-# 1 is for black in matrix
-# 2 is for free space in cell
+from Classes.chesspiece import Piece
 
-
-class Pawn():
+class Pawn(Piece):
     def __init__(self, position: list[int], color: bool, ID: int, direction: bool) -> None:
-        self.position: list[int] = position
-        self.color: bool = color
-        self.ID: int = ID
+        super().__init__(position, color, ID)
         self.direction: bool = direction # If True, then pawn moves up, down otherwise
-        self.firstMove: bool = True
     
     def getMoves(self, chessBoard: list[list[int]]) -> list[list[int]]:
         """Checks for possible moves in on chessboard.
@@ -59,47 +51,21 @@ class Pawn():
         
         return moves
 
-    def getPosition(self) -> list[int]:
-        return self.position
-
-    def setPosition(self, newPosition: list[int]) -> None:
-        self.position = newPosition
-        
-    def tryMove(self, newPosition: list[int], chessboard: list[list[int]]) -> tuple:
-        """Renders how it would look like if pawn moved to specified position. Does not change
-        pawn icon on canvas, this has to be done manually.
-
-        Args:
-            newPosition (_type_): _description_
-            chessboard (list[list[int]]): _description_
-
-        Returns:
-            tuple: Returns tuple of how would chessboard look like after move, old position of pawn
-            and if move is valid (if it can be played in normal chess game), checked by getMoves method.
-        """
-        possibleMoves = self.getMoves(chessboard)
-        oldPosition = self.position
-        chboard = copy.deepcopy(chessboard)
-        self.setPosition(newPosition)
-        valid = (newPosition in possibleMoves)
-        
-        chboard[oldPosition[1]][oldPosition[0]] = 2
-        chboard[self.position[1]][self.position[0]] = int(self.color)
-        
-        self.setPosition(oldPosition) # Setting back old position
-        
-        return tuple([chboard, oldPosition, valid])
-
-    def setPositionChessboard(self, newPosition: list[int], chessboard: list[list[int]]) -> None:
-        column = newPosition[0]
-        row = newPosition[1]
-        
-        oldColumn = self.position[0]
-        oldRow = self.position[1]
-        
-        chessboard[oldRow][oldColumn] = 2 # Removing color from square where pawn was
-        chessboard[row][column] = self.color # Setting square where pawn moved to its color
-        
-        self.setPosition(newPosition) # Setting new position of pawn
-        
-        self.firstMove = False
+if __name__ == "__main__":
+    p = Pawn([5, 7], 1, 0, True)
+    ch = []
+    for i in range(8):
+        ch.append([2] * 8)
+    ch[7][5] = 1
+    ch[6][4] = 0
+    for i in ch:
+        print(*i)
+    p.setPositionChessboard([5, 6], ch)
+    arr = p.getMoves(ch)
+    print(arr)
+    print()
+    for column, row in arr:
+        ch[row][column] = 9
+    
+    for i in ch:
+        print(*i)

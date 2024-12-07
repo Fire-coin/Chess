@@ -1,19 +1,8 @@
-import copy
+from Classes.chesspiece import Piece
 
-class Knight:
+class Knight(Piece):
     def __init__(self, position: list[int], color: bool, ID: int) -> None:
-        self.position: list[int] = position
-        self.color: bool = color
-        self.ID: int = ID
-
-    
-    def setPosition(self, newPosition: list[int]) -> None:
-        self.position = newPosition
-    
-    
-    def getPosition(self) -> list[int]:
-        return self.position
-    
+        super().__init__(position, color, ID)
     
     def getMoves(self, chessboard: list[list[int]]) -> list[list[int]]:
         
@@ -56,47 +45,6 @@ class Knight:
         return moves
 
     
-    def tryMove(self, newPosition: list[int], chessboard: list[list[int]]) -> tuple:
-        """Renders how it would look like if pawn moved to specified position. Does not change
-        pawn icon on canvas, this has to be done manually.
-
-        Args:
-            newPosition (_type_): _description_
-            chessboard (list[list[int]]): _description_
-
-        Returns:
-            tuple: Returns tuple of how would chessboard look like after move, old position of pawn
-            and if move is valid (if it can be played in normal chess game), checked by getMoves method.
-        """
-        possibleMoves = self.getMoves(chessboard)
-        oldPosition = self.position
-        chboard = copy.deepcopy(chessboard)
-        self.setPosition(newPosition)
-        valid = (newPossition in possibleMoves)
-        
-        chboard[oldPosition[1]][oldPosition[0]] = 2
-        chboard[self.position[1]][self.position[0]] = int(self.color)
-
-        self.setPosition(oldPosition) # Setting back old possition
-        
-        return tuple([chboard, oldPosition, valid])
-    
-    
-    def setPositionChessboard(self, newPosition: list[int], chessboard: list[list[int]]) -> None:
-        column = newPosition[0]
-        row = newPosition[1]
-        
-        oldColumn = self.position[0]
-        oldRow = self.position[1]
-        
-        chessboard[oldRow][oldColumn] = 2 # Removing color from square where knight
-        chessboard[row][column] = self.color # Setting square where knight moved to its color
-        
-        self.setPosition(newPosition) # Setting new position of knight
-
-
-
-
 if __name__ == "__main__":
     k = Knight([6, 7], 1, 0)
     ch = []
