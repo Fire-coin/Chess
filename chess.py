@@ -11,6 +11,9 @@ from Classes.rook import Rook
 
 selected = False
 selectedID = -1
+enPassant = False # Is True, when there is possibility of En Passant move
+# It is turned True every time pawn moves by 2 squares in the beggining, to
+# activate checking for En Passant
 
 def deleteGlow():
     c.delete("glow")
