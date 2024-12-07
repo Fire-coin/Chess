@@ -23,7 +23,7 @@ class Pawn(Piece):
                                             # checking for pawn movement
         try:
             # Checking if first move of 2 squares is possible
-            if self.firstMove and chessBoard[row + rMove * 2][column] == 2:
+            if self.firstMove and chessBoard[row + rMove * 2][column] == 2 and chessBoard[row + rMove][column] == 2:
                 moves.append([column, row + rMove * 2])
         except IndexError:
             pass

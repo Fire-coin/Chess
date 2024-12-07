@@ -37,10 +37,10 @@ def selectCell(e: Event) -> list[int] | None:
     row = y // 106
     col = x // 106
     if row > 7 or row < 0 or col > 7 or col < 0:
-        print("Invalid coordinates")
+        # print("Invalid coordinates")
         return None
     else:
-        print(f"row: {row}, column: {col}")
+        # print(f"row: {row}, column: {col}")
         return [col, row]
 
 
@@ -58,12 +58,22 @@ def selectFigure(e: Event):
         possibleMoves = pieces[selectedID].getMoves(chessboard)
         if [col, row] in possibleMoves: # If selected cell is valid move
             if chessboard[row][col] != 2: # If clicked cell is not an empty cell
+                # Add check for En Passant
                 pointedID = findFigureOnCoords([col, row])
                 canvasPieces[pointedID].delete()
                 del canvasPieces[pointedID]
                 del pieces[pointedID]
+            
             deleteGlow()
             canvasPieces[selectedID].move([col, row]) # Moves selected figure to clicked cell
+            
+            # Checking if pawn moved 2 squares forward to look for En Passant next move
+            if type(pieces[selectedID]) == Pawn:
+                curentPosition = pieces[selectedID].getPosition()
+                if abs(curentPosition[1] - row) == 2:
+                    enPassant = True
+                    # print("Moved by 2 squares")
+            
             pieces[selectedID].setPositionChessboard([col, row], chessboard) # Setting positions in bit chessboard
             selected = False
             selectedID = -1
@@ -94,7 +104,7 @@ def selectFigure(e: Event):
         showGlow(selectedID)
     
     
-    print(selected, selectedID)
+    # print(selected, selectedID)
     
     
 

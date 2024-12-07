@@ -43,9 +43,9 @@ class Piece:
         oldColumn = self.position[0]
         oldRow = self.position[1]
         
-        chessboard[oldRow][oldColumn] = 2 # Removing color from square where pawn was
-        chessboard[row][column] = self.color # Setting square where pawn moved to its color
+        chessboard[oldRow][oldColumn] = 2 # Removing color from square where piece was
+        chessboard[row][column] = self.color # Setting square where piece moved to its color
         
-        self.setPosition(newPosition) # Setting new position of pawn
+        self.setPosition(newPosition) # Setting new position of piece
         
         self.firstMove = False
