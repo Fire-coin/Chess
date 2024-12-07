@@ -5,6 +5,7 @@ class Bishop:
         self.position = position
         self.color = color
         self.ID = ID
+        self.firstMove = True
     
     def getMoves(self, chessboard: list[list[int]]) -> list[list[int]]:
         
