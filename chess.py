@@ -2,9 +2,9 @@ from tkinter import *
 import time
 import datetime
 from Classes.canvaspiece import VisiblePiece
-from Github.Chess.Classes.pawn import Pawn
-from Github.Chess.Classes.bishop import Bishop
-from Github.Chess.Classes.knight import Knight
+from Classes.pawn import Pawn
+from Classes.bishop import Bishop
+from Classes.knight import Knight
 from Classes.king import King
 from Classes.queen import Queen
 from Classes.rook import Rook
