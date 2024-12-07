@@ -1,0 +1,1 @@
+This is source of images: https://mindchess.com.my/how-to-play-chess.html#/
